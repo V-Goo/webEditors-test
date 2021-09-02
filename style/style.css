@@ -1,0 +1,41 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+h1 {
+	margin: 0;
+	
+}
+button {
+	border: none;
+	background-color: transparent;
+	font-family: inherit;
+	padding: 0;
+	cursor: pointer;
+}
+.page {
+	padding: 0.5vw 1vw;
+}
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	#outline:: 1px navajowhite dotted;
+}
+.header-logo {
+	display: flex;
+	align-items: center;
+	#outline:: firebrick 1px double;
+
+}
+.logo-header__img{
+	#outline:: dashed 1px navy;
+	margin: auto;
+}
+
+.header-button{
+	border: 1px black solid;
+	border-radius: 0.3em;
+	padding: 0.2em 0.3em;
+}
