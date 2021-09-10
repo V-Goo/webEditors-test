@@ -1,0 +1,27 @@
+{
+  "type": "module",
+  "name": "webeditors-test",
+  "version": "0.0.1",
+  "description": "Testing various editors \\ Тестирую различные редакторы",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/V-Goo/webEditors-test.git"
+  },
+  "keywords": [
+    "editorjs V-G00_WebEditors--editorjs"
+  ],
+  "author": "VGoo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/V-Goo/webEditors-test/issues"
+  },
+  "homepage": "https://github.com/V-Goo/webEditors-test#readme",
+  "dependencies": {
+    "@editorjs/editorjs": "^2.22.2",
+    "@editorjs/header": "^2.6.1"
+  }
+}
