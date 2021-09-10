@@ -17,22 +17,22 @@ const editor = new EditorJS({
       {
         type: "header",
         data: {
-          text: "Editor.js",
-          level: 2,
+          text: "Поехали!",
+          level: 1,
         },
       },
       {
         type: "paragraph",
         data: {
-          text: "Hey. Meet the new Editor. On this page you can see it in action — try to edit this text. Source code of the page contains the example of connection and configuration.",
+          text: "Лорем, мать его разэтак, Ипсум!",
         },
       },
     ],
   },
   // data: {},
-  onReady: function () {
-    saveButton.click();
-  },
+  // onReady: function () {
+  //   saveButton.click();
+  // },
 });
 /**
  * Saving button
@@ -41,6 +41,9 @@ const editor = new EditorJS({
 const saveButton = document.getElementById("saveButton");
 saveButton.addEventListener('click', function () {
 editor.save().then((savedData) => {
-  console.log(savedData);
+	let stringName = savedData.time
+	let stringBlock= JSON.stringify(savedData)
+	localStorage.setItem(stringName.toString(), stringBlock)
+  console.log(stringBlock);
 });
 });
