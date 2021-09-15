@@ -46,9 +46,52 @@ const editor = new EditorJS({
   //
 });
 
+let keys = Object.keys(localStorage).sort((a, b) => b - a);
+let isEmptyLS = () => !keys.length > 0;
+let lastSavedEmpty = {blocks: [
+  {
+    type: "header",
+    data: {
+      text: "Текущий Экземпляр редактора не имеет доступа к локальным копиям документов.",
+      level: 4,
+    },
+  },
+],}
+console.log("isEmptyLS: ", isEmptyLS());
+let lastSavedNoEmpty = JSON.parse(localStorage.getItem(keys[0]));
+console.log('lastSavedNoEmpty: ', lastSavedNoEmpty);
+let lastSaved = isEmptyLS() ? lastSavedEmpty : lastSavedNoEmpty
+console.log('lastSaved: ', lastSaved);
+
 try {
   await editor.isReady;
   console.log("Слушаю и повинуюсь!");
+  // console.log('editorJS: ', editor);
+  // editor.configuration.placeholder = 'Hi'
+  // editor.render()
+  // console.log('editor.configuration: ', editor.configuration.placeholder);
+  // console.log("lastSaved blocks: ", lastSaved);
+
+  // console.log("keys sorted: ", keys);
+  // console.log("lastSaved: ", lastSaved);
+  // console.log("lastSaved block: ", lastSaved.blocks);
+  // editor.render(lastSaved.blocks[0].data);
+  editor.render(lastSaved);
+  // editor.render({blocks: [
+  //   {
+  //           type: "header",
+  //           data: {
+  //             text: "Поехали!",
+  //             level: 1,
+  //           },
+  //         },
+  //         {
+  //           type: "paragraph",
+  //           data: {
+  //             text: "Лорем, мать его разэтак, Ипсум!",
+  //           },
+  //         },
+  //       ],})
   /** Do anything you need after editor initialization */
 } catch (reason) {
   console.log(`Editor.js initialization failed because of ${reason}`);
@@ -77,7 +120,7 @@ const saveData = () => {
  */
 
 // Connection to a broadcast channel
-const bc = new BroadcastChannel("test_channel");
+// const bc = new BroadcastChannel("test_channel");
 // Example of sending of a very simple message
 // bc.postMessage('This is a test message.');
 // console.log(bc);
@@ -85,15 +128,18 @@ const bc = new BroadcastChannel("test_channel");
 // bc.onmessage = function (ev) { console.log(ev); }
 
 // ! Выводит содержимое loclStorage в консоль
-let keys = Object.keys(localStorage);
-for (let key of keys) {
-  let keykey = localStorage.getItem(key);
-  // JSON.parse
-  let keyJSON = JSON.parse(keykey);
-  // console.log('keyJSON: ', keyJSON);
-  //  console.log(`${key}:`, keyJSON);
-}
-//  console.log(keys);
+// let keys = Object.keys(localStorage).sort( (a, b) => a - b ).reverse();
+// keys.sort( (a, b) => a - b );
+// console.log('last key: ', keys.pop());
+// let key
+// for (key of keys) {
+// let keykey = localStorage.getItem(key);
+// JSON.parse
+// let keyJSON = JSON.parse(keykey);
+// console.log('keyJSON: ', keyJSON);
+//  console.log(`${key}:`, keyJSON);
+// }
+// console.log('keys: ', typeof(keys));
 
 /**
  * Saving button
@@ -102,21 +148,23 @@ for (let key of keys) {
 const saveButton = document.getElementById("saveButton");
 saveButton.addEventListener("click", saveData);
 
-// ToDo: autosave to local storage in `n` seconds after input completes
-// todo: закрыть BroadcastChannel при выходе
-
-// let delaySave = editor.onChange
-// console.log('delaySave: ',typeof(delaySave));
 function typeTo(delay) {
   let typeTimeout;
-  let listenToInstance = document.querySelector("section.editor");
+  const listenToInstance = document.querySelector("section.editor");
   listenToInstance.addEventListener("input", () => {
     clearTimeout(typeTimeout);
     typeTimeout = setTimeout(() => saveData(), delay);
   });
 }
-typeTo(3000);
+typeTo(5000);
 
+// __ToDo: autosave to local storage in `n` seconds after input completes
+// todo: закрыть BroadcastChannel при выходе
+// todo: При старте приложения загрузить последний сохранённый в localStorage документ
+// todo: CSS?
+//  todo: прописать задержку через настройку объекта
+// todo  поиграться с indexDB
+// todo: rxDB -- сохранение по кнопке
 // ?Why?
 //	 !W!
 // *	 Ha
